@@ -1,10 +1,12 @@
 ---
 name: sit-124-jumpserver-deploy
-description: 通过 JumpServer 堡垒机部署 SIT 环境服务的 CLI 工具。当用户要求部署服务、重启服务、查看服务状态、新增服务配置、修改部署工具时使用。支持交互式和非交互式部署。
+description: 通过 JumpServer 堡垒机部署 SIT 测试环境的自有业务服务（地铁业务不在这套环境）。当用户要求部署自有业务服务、重启服务、查看服务状态、新增服务配置、修改部署工具时使用；地铁业务服务部署走 sit-metro-jumpserver-deploy，两者跳板机与目标机不同，不可混用。支持交互式和非交互式部署。
 version: 1.0.0
 ---
 
 # JumpServer 部署工具使用指南
+
+> **适用范围**：SIT 测试环境的**自有业务**服务部署。链路是本地 → `8.139.6.141:2222` 跳板机 → 目标机 `sityun124`。地铁业务服务（南京地铁乘车码全链路那些）不在这套环境，走 `sit-metro-jumpserver-deploy`（跳板机 `jump.unservice.net:2222`）。两个技能的触发词很像，选错就是往另一套环境发版。
 
 ## 工具位置
 
@@ -19,7 +21,7 @@ skills/sit-124-jumpserver-deploy/
 
 > 首次使用：`cp deploy_config.example.json deploy_config.json`，填入 `jump.password`（口令已不再硬编码在脚本里，缺失时工具会直接报错提示）。
 
-> 路径相对技能根目录，工具随技能一起分发：仓库副本在 `<仓库>/skills/sit-124-jumpserver-deploy/`，已安装副本在 `~/.qoder/skills/sit-124-jumpserver-deploy/`，两边内容一致。下面所有命令都在本技能目录下执行。
+> 路径相对技能根目录，工具随技能一起分发：仓库侧技能目录直接挂在仓库根下（`<仓库根>/sit-124-jumpserver-deploy/`，没有 `skills/` 中间层），已安装副本在 `~/.qoder/skills/sit-124-jumpserver-deploy/`，两边内容一致，用仓库根的 `sync_skill.sh` 同步。下面所有命令都在本技能目录下执行。
 
 ## 运行方式
 

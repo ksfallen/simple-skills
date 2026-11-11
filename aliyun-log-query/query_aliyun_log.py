@@ -148,8 +148,8 @@ def run_query(client, env_name, args, cfg, from_t, to_t, line):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="查询阿里云 SLS 日志（test/prod 双环境）")
-    ap.add_argument("--env", default=None, help="环境: test | prod | all，默认取配置 default_env(test)")
+    ap = argparse.ArgumentParser(description="查询阿里云 SLS 日志（sit/prod 双环境）")
+    ap.add_argument("--env", default=None, help="环境: sit | prod | all，默认取配置 default_env（当前 sit）")
     ap.add_argument("-p", "--project", help="project 名")
     ap.add_argument("-l", "--logstore", help="logstore 名")
     ap.add_argument("--topic", default="", help="按 __topic__ 过滤")
@@ -168,7 +168,7 @@ def main():
     args = ap.parse_args()
 
     cfg = load_config()
-    env_name = args.env or cfg.get("default_env", "test")
+    env_name = args.env or cfg.get("default_env", "sit")
     targets = resolve_envs(cfg, env_name)
 
     if args.list_projects:

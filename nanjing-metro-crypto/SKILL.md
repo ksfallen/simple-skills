@@ -8,6 +8,8 @@ description: 南京地铁手机号 AES 加解密工具。复现 Java EncryptUtil
 
 复现 Java `EncryptUtils` 的 AES 加解密逻辑，默认密钥 `7c5b4cbf35eb4e2db962d0702ae819a3`。
 
+> 环境：**不区分**。这套密钥测试与生产通用，不需要按环境换 `--key`，也不存在"解出来是乱码是因为环境不对"这种情况——解不出就先查输入本身（是否漏字符、是否非 Hex）。
+
 ## 脚本位置
 
 `nanjing_metro_crypto.py`（本技能目录内）

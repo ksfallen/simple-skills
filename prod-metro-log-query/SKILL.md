@@ -1,6 +1,6 @@
 ---
-name: metro-log-query
-description: 查询地铁业务日志的阿里云 SLS 工具，基于 aliyun-log-python-sdk。按城市与链路环节(卡管/前置/生码/收单/补登/支付)过滤 topic，支持开卡、生码、进站出站、请款退款、退卡、单边行程退卡等全链路追踪。当用户要求"查地铁日志""开卡链路""生码链路""进站出站""请款退款""退卡""单边行程退卡""按手机号/订单号追踪""查询阿里云日志/SLS"时使用。
+name: prod-metro-log-query
+description: 查询地铁业务日志的阿里云 SLS 工具，只查生产环境（metro-* project，endpoint cn-shanghai），基于 aliyun-log-python-sdk。按城市与链路环节(卡管/前置/生码/收单/补登/支付)过滤 topic，支持开卡、生码、进站出站、请款退款、退卡、单边行程退卡等全链路追踪。当用户要求"查地铁日志""查地铁生产日志""开卡链路""生码链路""进站出站""请款退款""退卡""单边行程退卡""按手机号/订单号追踪""查询阿里云日志/SLS"时使用。
 version: 1.3.0
 ---
 
@@ -8,10 +8,14 @@ version: 1.3.0
 
 使用 `aliyun-log-python-sdk` 查询阿里云日志服务（SLS）中的地铁业务日志，支持按城市与链路环节（卡管 / 前置 / 生码 / 收单 / 补登 / 支付）过滤，追踪开卡、生码、进站出站、请款退款、退卡、单边行程退卡等链路。
 
+> **环境：只查生产。** `config.json` 里是单一 endpoint（`cn-shanghai.log.aliyuncs.com`）配一套 AccessKey，`cities.*.project` 全是 `metro-*` 系列，没有 SIT 那套配置，脚本也没有 `--env` 开关——不要用它找测试环境数据。技能名的 `prod-` 前缀就是标明这件事。
+>
+> 要查测试环境：SIT 应用日志走 `aliyun-log-query --env sit`（project `sityun-logs`），SIT 数据库走 `sit-database-query`。仓库里目前没有地铁链路的 SIT 日志技能，需要的话新建 `sit-metro-log-query`，别拿本技能凑。
+
 ## 文件位置
 
 ```
-skills/metro-log-query/
+skills/prod-metro-log-query/
 ├── query_metro_log.py    # 主程序
 ├── config.example.json   # 脱敏模板（占位符密钥，可提交）
 └── config.json           # 真实配置（含 AccessKey 明文，已 .gitignore，不提交）
@@ -22,7 +26,7 @@ skills/metro-log-query/
 `config.json` 内含密钥，不入库。首次使用请从模板复制并填入真实 AccessKey：
 
 ```bash
-cd skills/metro-log-query
+cd skills/prod-metro-log-query
 cp config.example.json config.json
 # 编辑 config.json，把 accessKeyId / access_key 换成真实值
 ```
@@ -64,7 +68,7 @@ pip install aliyun-log-python-sdk
 ## 运行方式
 
 ```bash
-cd skills/metro-log-query
+cd skills/prod-metro-log-query
 
 # 默认优先查 metro-card 共享库（不知城市时，按手机号全量搜）
 python query_metro_log.py -q "17755752098" --from=-2d -n 50

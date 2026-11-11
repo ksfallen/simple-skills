@@ -138,7 +138,7 @@ def load_jump_settings():
     except Exception:
         return
     JUMP_HOST = jump.get("host", JUMP_HOST)
-    JUMP_PORT = int(jump.get("port", JUMP_PORT))
+    JUMP_PORT = int(jump.get("port") or JUMP_PORT)
     JUMP_USER = jump.get("user", JUMP_USER)
     JUMP_PASS = jump.get("password", JUMP_PASS)
 
