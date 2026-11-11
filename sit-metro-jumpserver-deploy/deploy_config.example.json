@@ -1,0 +1,417 @@
+{
+  "jump": {
+    "host": "",
+    "port": "",
+    "user": "",
+    "password": "<your-jump-password>"
+  },
+  "services": {
+    "metro-retro": {
+      "script_name": "metro-retro",
+      "script_path": "/opt/receipt/metro-retro",
+      "code_path": "/opt/receipt/metro-retro/code/metro-retro",
+      "branch": "stable",
+      "label": "补登"
+    },
+    "metro-ech5": {
+      "script_name": "ebuscard",
+      "script_path": "/opt/little/ech5",
+      "code_path": "/opt/little/ech5/code/metro-ech5",
+      "branch": "stable",
+      "label": "ech5"
+    },
+    "metro-integration": {
+      "script_name": "integration",
+      "script_path": "/opt/manage/integration",
+      "code_path": "/opt/manage/integration/code/metro-ecard-manage",
+      "branch": "stable",
+      "label": "卡管"
+    },
+    "metro-receipt": {
+      "script_name": "metro-receipt",
+      "script_path": "/opt/receipt/metro-receipt",
+      "code_path": "/opt/receipt/metro-receipt/code/metro-receipt",
+      "branch": "stable",
+      "label": "收单"
+    },
+    "metro-pay": {
+      "script_name": "pay",
+      "script_path": "/opt/receipt/metro-pay/ace-pay",
+      "code_path": "/opt/receipt/metro-pay/code/metro-pay",
+      "branch": "dev",
+      "label": "支付"
+    },
+    "metro-benefit": {
+      "script_name": "metro-benefit",
+      "script_path": "/opt/receipt/metro-pay/metro-benefit-core",
+      "code_path": "/opt/receipt/metro-pay/code/metro-pay",
+      "branch": "dev",
+      "label": "权益"
+    },
+    "metro-settlement": {
+      "script_name": "settlement",
+      "script_path": "/opt/receipt/metro-settlement",
+      "code_path": "/opt/receipt/metro-settlement/code/metro-settlement",
+      "branch": "dev",
+      "label": "对账"
+    },
+    "nanjing-metro-retro": {
+      "script_name": "metro-retro",
+      "script_path": "/opt/receipt/metro-retro",
+      "code_path": "/opt/receipt/metro-retro/code/metro-retro",
+      "branch": "stable",
+      "label": "南京补登",
+      "target_host": "test-nanjing-tools001"
+    },
+    "nanjing-metro-ech5": {
+      "script_name": "ebuscard",
+      "script_path": "/opt/little/ech5",
+      "code_path": "/opt/little/ech5/code/metro-ech5",
+      "branch": "stable",
+      "label": "南京-ech5",
+      "target_host": "test-nanjing-tools001"
+    },
+    "nanjing-metro-integration": {
+      "script_name": "integration",
+      "script_path": "/opt/manage/integration",
+      "code_path": "/opt/manage/integration/code/metro-ecard-manage",
+      "branch": "stable",
+      "label": "南京-卡管",
+      "target_host": "test-nanjing-tools001"
+    },
+    "nanjing-metro-receipt": {
+      "script_name": "metro-receipt",
+      "script_path": "/opt/receipt/metro-receipt",
+      "code_path": "/opt/receipt/metro-receipt/code/metro-receipt",
+      "branch": "stable",
+      "label": "南京-收单",
+      "target_host": "test-nanjing-tools001"
+    },
+    "nanjing-metro-pay": {
+      "script_name": "pay",
+      "script_path": "/opt/receipt/metro-pay/ace-pay",
+      "code_path": "/opt/receipt/metro-pay/code/metro-pay",
+      "branch": "dev",
+      "label": "南京-支付",
+      "target_host": "test-nanjing-tools001"
+    },
+    "nanjing-metro-settlement": {
+      "script_name": "settlement",
+      "script_path": "/opt/receipt/metro-settlement",
+      "code_path": "/opt/receipt/metro-settlement/code/metro-settlement",
+      "branch": "stable",
+      "label": "南京-对账",
+      "target_host": "test-nanjing-tools001"
+    },
+    "nanjing-metro-pre": {
+      "script_name": "najing",
+      "script_path": "/opt/front/najing",
+      "code_path": "/opt/front/najing/code/metro-pre",
+      "branch": "stable",
+      "label": "南京-前置",
+      "target_host": "test-nanjing-tools001"
+    },
+    "nanjing-metro-apply-cert": {
+      "script_name": "spi-getcode",
+      "script_path": "/opt/spi-getcode/najing",
+      "code_path": "/opt/spi-getcode/najing/code/metro-apply-cert",
+      "branch": "stable",
+      "label": "南京生码",
+      "target_host": "test-nanjing-tools001"
+    },
+    "changchun-metro-pre": {
+      "script_name": "changchun",
+      "script_path": "/opt/front/changchun",
+      "code_path": "/opt/front/changchun/code/changchun-pre",
+      "branch": "stable",
+      "label": "长春前置"
+    },
+    "chengdu-metro-pre": {
+      "script_name": "chengdu",
+      "script_path": "/opt/front/chengdu",
+      "code_path": "/opt/front/chengdu/code/chengdu-metro-pre",
+      "branch": "stable",
+      "label": "成都前置"
+    },
+    "chongqing-metro-pre": {
+      "script_name": "chongqing",
+      "script_path": "/opt/front/chongqing",
+      "code_path": "/opt/front/chongqing/code/chongqing-metro-pre",
+      "branch": "stable",
+      "label": "重庆前置"
+    },
+    "dongguan-metro-pre": {
+      "script_name": "dongguan-pre",
+      "script_path": "/opt/front/dongguan",
+      "code_path": "/opt/CODE/dongguan-metro",
+      "branch": "stable",
+      "label": "东莞前置"
+    },
+    "foshan-metro-pre": {
+      "script_name": "foshan-pre",
+      "script_path": "/opt/front/foshan",
+      "code_path": "/opt/front/foshan/code/foshan-pre",
+      "branch": "stable",
+      "label": "佛山前置"
+    },
+    "fuzhou-metro-pre": {
+      "script_name": "fuzhou",
+      "script_path": "/opt/front/fuzhou",
+      "code_path": "/opt/front/fuzhou/code/fuzhou-pre",
+      "branch": "develop",
+      "label": "福州前置"
+    },
+    "hefei-metro-pre": {
+      "script_name": "hefei-pre",
+      "script_path": "/opt/front/hefei",
+      "code_path": "/opt/front/hefei/code/hefei-pre",
+      "branch": "develop",
+      "label": "合肥前置"
+    },
+    "huhehaote-metro-pre": {
+      "script_name": "huhehaote-pre",
+      "script_path": "/opt/front/huhehaote",
+      "code_path": "/opt/front/huhehaote/code/huhehaote-pre",
+      "branch": "stable",
+      "label": "呼和浩特前置"
+    },
+    "jinan-metro-pre": {
+      "script_name": "jinan-pre",
+      "script_path": "/opt/front/jinan",
+      "code_path": "/opt/front/jinan/code/jinan-pre",
+      "branch": "stable",
+      "label": "济南前置"
+    },
+    "jinhua-metro-pre": {
+      "script_name": "jinhua-pre",
+      "script_path": "/opt/front/jinhua",
+      "code_path": "/opt/front/jinhua/code/jinhua-pre",
+      "branch": "dev",
+      "label": "金华前置"
+    },
+    "kunming-metro-pre": {
+      "script_name": "kunming",
+      "script_path": "/opt/front/kunming",
+      "code_path": "/opt/front/kunming/code/metro-pre",
+      "branch": "stable",
+      "label": "昆明前置"
+    },
+    "luoyang-metro-pre": {
+      "script_name": "luoyang-pre",
+      "script_path": "/opt/front/luoyang",
+      "code_path": "/opt/front/luoyang/code/luoyang-pre",
+      "branch": "stable",
+      "label": "洛阳前置"
+    },
+    "nanping-metro-pre": {
+      "script_name": "nanping-pre",
+      "script_path": "/opt/front/nanping",
+      "code_path": "/opt/front/nanping/code/nanping-pre",
+      "branch": "master",
+      "label": "南平前置"
+    },
+    "qingdao-metro-pre": {
+      "script_name": "pre-qindao",
+      "script_path": "/opt/front/qingdao",
+      "code_path": "/opt/front/qingdao/code/qingdao-metro-pre",
+      "branch": "stable",
+      "label": "青岛前置"
+    },
+    "shuke-metro-pre": {
+      "script_name": "pre-shuke",
+      "script_path": "/opt/front/shuke",
+      "code_path": "/opt/front/shuke/code/shuke-metro-pre",
+      "branch": "master",
+      "label": "数科前置"
+    },
+    "taizhou-metro-pre": {
+      "script_name": "taizhou-pre",
+      "script_path": "/opt/front/taizhou",
+      "code_path": "/opt/front/taizhou/code/taizhou-pre",
+      "branch": "dev",
+      "label": "台州前置"
+    },
+    "wuxi-metro-pre": {
+      "script_name": "wuxi",
+      "script_path": "/opt/front/wuxi",
+      "code_path": "/opt/front/wuxi/code/wuxi-pre",
+      "branch": "stable",
+      "label": "无锡前置"
+    },
+    "changchun-metro-getcode": {
+      "script_name": "ccgetcode",
+      "script_path": "/opt/spi-getcode/changchun",
+      "code_path": "/opt/spi-getcode/changchun/code/changchun-getcode",
+      "branch": "stable",
+      "label": "长春生码"
+    },
+    "chengdu-metro-getcode": {
+      "script_name": "cd-getcode",
+      "script_path": "/opt/spi-getcode/chengdu",
+      "code_path": "/opt/spi-getcode/chengdu/code/chengdu-metro-apply-cert",
+      "branch": "stable",
+      "label": "成都生码"
+    },
+    "chongqing-metro-getcode": {
+      "script_name": "cq-getcode",
+      "script_path": "/opt/spi-getcode/chongqing",
+      "code_path": "/opt/spi-getcode/chongqing/code/chongqing-getcode",
+      "branch": "dev",
+      "label": "重庆生码"
+    },
+    "dongguan-metro-getcode": {
+      "script_name": "dongguan-getcode",
+      "script_path": "/opt/spi-getcode/dongguan",
+      "code_path": "/opt/CODE/dongguan-metro",
+      "branch": "stable",
+      "label": "东莞生码"
+    },
+    "foshan-metro-getcode": {
+      "script_name": "foshan-getcode",
+      "script_path": "/opt/spi-getcode/foshan",
+      "code_path": "/opt/spi-getcode/foshan/code/foshan-getcode",
+      "branch": "stable",
+      "label": "佛山生码"
+    },
+    "fuzhou-metro-getcode": {
+      "script_name": "fzspi",
+      "script_path": "/opt/spi-getcode/fuzhou",
+      "code_path": "/opt/spi-getcode/fuzhou/code/fuzhou-getcode",
+      "branch": "master",
+      "label": "福州生码"
+    },
+    "hefei-metro-getcode": {
+      "script_name": "hefei-getcode",
+      "script_path": "/opt/spi-getcode/hefei",
+      "code_path": "/opt/spi-getcode/hefei/code/hefei-getcode",
+      "branch": "stable",
+      "label": "合肥生码"
+    },
+    "huhehaote-metro-getcode": {
+      "script_name": "huhehaote-getcode",
+      "script_path": "/opt/spi-getcode/huhehaote",
+      "code_path": "/opt/spi-getcode/huhehaote/code/huhehaote-getcode",
+      "branch": "stable",
+      "label": "呼和浩特生码"
+    },
+    "jinan-metro-getcode": {
+      "script_name": "jinan-getcode",
+      "script_path": "/opt/spi-getcode/jinan",
+      "code_path": "/opt/spi-getcode/jinan/code/jinan-getcode",
+      "branch": "stable",
+      "label": "济南生码"
+    },
+    "jinhua-metro-getcode": {
+      "script_name": "jinhua-getcode",
+      "script_path": "/opt/spi-getcode/jinhua",
+      "code_path": "/opt/spi-getcode/jinhua/code/jinhua-getcode",
+      "branch": "master",
+      "label": "金华生码"
+    },
+    "kunming-metro-getcode": {
+      "script_name": "kmgetcodespi",
+      "script_path": "/opt/spi-getcode/kunming",
+      "code_path": "/opt/spi-getcode/kunming/code/metro-apply-cert",
+      "branch": "stable",
+      "label": "昆明生码"
+    },
+    "luoyang-metro-getcode": {
+      "script_name": "luoyang-getcode",
+      "script_path": "/opt/spi-getcode/luoyang",
+      "code_path": "/opt/spi-getcode/luoyang/code/luoyang-getcode",
+      "branch": "master",
+      "label": "洛阳生码"
+    },
+    "nanping-metro-getcode": {
+      "script_name": "nanping-getcode",
+      "script_path": "/opt/spi-getcode/nanping",
+      "code_path": "/opt/spi-getcode/nanping/code/nanping-getcode",
+      "branch": "master",
+      "label": "南平生码"
+    },
+    "qingdao-metro-getcode": {
+      "script_name": "qingdao-metro-getcode",
+      "script_path": "/opt/spi-getcode/qingdao",
+      "code_path": "/opt/spi-getcode/qingdao/code/qingdao-metro-getcode",
+      "branch": "stable",
+      "label": "青岛生码"
+    },
+    "shuke-metro-getcode": {
+      "script_name": "shuke-metro-getcode",
+      "script_path": "/opt/spi-getcode/shuke",
+      "code_path": "/opt/spi-getcode/shuke/code/shuke-metro-getcode",
+      "branch": "master",
+      "label": "数科生码"
+    },
+    "taizhou-metro-getcode": {
+      "script_name": "taizhou-getcode",
+      "script_path": "/opt/spi-getcode/taizhou",
+      "code_path": "/opt/spi-getcode/taizhou/code/taizhou-getcode",
+      "branch": "master",
+      "label": "台州生码"
+    },
+    "wuxi-metro-getcode": {
+      "script_name": "wxspi",
+      "script_path": "/opt/spi-getcode/wuxi",
+      "code_path": "/opt/spi-getcode/wuxi/code/wuxi-getcode",
+      "branch": "stable",
+      "label": "无锡生码"
+    },
+    "nantong-metro-retro": {
+      "script_name": "metro-retro",
+      "script_path": "/opt/nantong/receipt/metro-retro",
+      "code_path": "/opt/nantong/receipt/metro-retro/code/metro-retro",
+      "branch": "develop",
+      "label": "南通补登"
+    },
+    "nantong-metro-ech5": {
+      "script_name": "ebuscard",
+      "script_path": "/opt/nantong/little/ech5",
+      "code_path": "/opt/nantong/little/ech5/code/metro-ech5",
+      "branch": "stable",
+      "label": "南通-ech5"
+    },
+    "nantong-metro-integration": {
+      "script_name": "integration",
+      "script_path": "/opt/nantong/manage/integration",
+      "code_path": "/opt/nantong/manage/integration/code/nantong-metro-manage",
+      "branch": "stable",
+      "label": "南通-卡管"
+    },
+    "nantong-metro-receipt": {
+      "script_name": "metro-receipt",
+      "script_path": "/opt/nantong/receipt/metro-receipt",
+      "code_path": "/opt/nantong/receipt/metro-receipt/code/metro-receipt",
+      "branch": "develop",
+      "label": "南通-收单"
+    },
+    "nantong-metro-pay": {
+      "script_name": "pay",
+      "script_path": "/opt/nantong/receipt/metro-pay/ace-pay",
+      "code_path": "/opt/nantong/receipt/metro-pay/code/metro-pay",
+      "branch": "dev",
+      "label": "南通-支付"
+    },
+    "nantong-metro-settlement": {
+      "script_name": "settlement",
+      "script_path": "/opt/nantong/receipt/metro-settlement",
+      "code_path": "/opt/nantong/receipt/metro-settlement/code/metro-settlement",
+      "branch": "develop",
+      "label": "南通-对账"
+    },
+    "nantong-metro-pre": {
+      "script_name": "nantong",
+      "script_path": "/opt/nantong/front",
+      "code_path": "/opt/nantong/front/code/nantong-metro-pre",
+      "branch": "develop",
+      "label": "南通-前置"
+    },
+    "nantong-metro-getcode": {
+      "script_name": "spi-getcode",
+      "script_path": "/opt/nantong/spi-getcode",
+      "code_path": "/opt/nantong/spi-getcode/code/nantong-metro-getcode",
+      "branch": "develop",
+      "label": "南通生码"
+    }
+  }
+}

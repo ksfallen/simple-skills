@@ -1,0 +1,168 @@
+{
+  "endpoint": "cn-shanghai.log.aliyuncs.com",
+  "accessKeyId": "<your-access-key-id>",
+  "access_key": "<your-access-key-secret>",
+  "default_city": "metro-card",
+  "default_card_topic": "integration",
+  "default_front_topic": "",
+  "default_getcode_topic": "",
+  "default_receipt_topic": "metro-receipt",
+  "default_retro_topic": "metro-retro",
+  "default_pay_topic": "ace-api",
+  "cities": {
+    "metro-card": {
+      "aliases": ["default", "all", "全部", "默认"],
+      "project": "metro-card",
+      "logstore": "metro-card"
+    },
+    "北京": {
+      "aliases": ["beijing", "bj"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "beijing-pre",
+      "getcode_topic": "beijing-getcode"
+    },
+    "昆明": {
+      "aliases": ["kunming", "km"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "km-metro",
+      "getcode_topic": "getcode-spi"
+    },
+    "成都": {
+      "aliases": ["chengdu", "cd"],
+      "project": "metro-chengdu",
+      "logstore": "chengdu-metro",
+      "card_topic": "chengdu-integration",
+      "front_topic": "chengdu-front",
+      "getcode_topic": "chengdu-qrcode",
+      "receipt_topic": "chengdu-receipt",
+      "retro_topic": "chengdu-retro",
+      "pay_topic": "chengdu-pay"
+    },
+    "重庆": {
+      "aliases": ["chongqing", "cq"],
+      "project": "metro-chongqing",
+      "logstore": "metro_chongqing",
+      "front_topic": "chongqing-pre",
+      "getcode_topic": "spi",
+      "receipt_topic": "receipt",
+      "pay_topic": "ace-pay"
+    },
+    "南京": {
+      "aliases": ["nanjing", "nj"],
+      "project": "metro-nanjing",
+      "logstore": "nanjing-metro",
+      "card_topic": "nanjing-integration",
+      "front_topic": "nanjing-metro",
+      "getcode_topic": "nanjing-spi",
+      "receipt_topic": "nanjing-receipt",
+      "retro_topic": "nanjing-retro",
+      "pay_topic": "nanjing-ace-pay"
+    },
+    "东莞": {
+      "aliases": ["dongguan", "dg"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "dongguan-pre",
+      "getcode_topic": "dongguan-getcode"
+    },
+    "南通": {
+      "aliases": ["nantong", "nt"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "card_topic": "nantong-integration",
+      "front_topic": "nantong-metro-pre",
+      "getcode_topic": "nantong-metro-getcode",
+      "receipt_topic": "nantong-metro-receipt",
+      "retro_topic": "nantong-retro",
+      "pay_topic": "nantong-ace-pay"
+    },
+    "青岛": {
+      "aliases": ["qingdao", "qd"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "qingdao-front",
+      "getcode_topic": "qingdao-getcode"
+    },
+    "福州": {
+      "aliases": ["fuzhou", "fz"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "fuzhou-front",
+      "getcode_topic": "fuzhou-spi"
+    },
+    "佛山": {
+      "aliases": ["foshan", "fs"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "foshan-front",
+      "getcode_topic": "foshan-spi"
+    },
+    "合肥": {
+      "aliases": ["hefei", "hf"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "hefei-front",
+      "getcode_topic": "hefei-spi"
+    },
+    "呼和浩特": {
+      "aliases": ["hhht", "huhehaote"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "hhht-front",
+      "getcode_topic": "hhht-spi"
+    },
+    "济南": {
+      "aliases": ["jinan", "jn"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "jinan-front",
+      "getcode_topic": "jinan-spi"
+    },
+    "金华": {
+      "aliases": ["jinhua", "jh"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "jinhua-front",
+      "getcode_topic": "jinhua-spi"
+    },
+    "洛阳": {
+      "aliases": ["luoyang", "ly"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "luoyang-front",
+      "getcode_topic": "luoyang-spi"
+    },
+    "南平": {
+      "aliases": ["nanping", "np"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "nanping-front",
+      "getcode_topic": "nanping-spi"
+    },
+    "泰州": {
+      "aliases": ["taizhou", "tz"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "taizhou-front",
+      "getcode_topic": "taizhou-spi"
+    },
+    "长春": {
+      "aliases": ["changchun", "cc"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "changchun-front",
+      "getcode_topic": "changchun-spi"
+    },
+    "无锡": {
+      "aliases": ["wuxi", "wx"],
+      "project": "metro-card",
+      "logstore": "metro-card",
+      "front_topic": "wuxi-front",
+      "getcode_topic": "wuxi-spi"
+    }
+  },
+  "default_line": 100,
+  "default_from": "-1h"
+}

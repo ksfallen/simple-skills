@@ -1,0 +1,20 @@
+{
+  "endpoint": "cn-hangzhou-finance.log.aliyuncs.com",
+  "default_env": "sit",
+  "default_from": "-1h",
+  "default_line": 100,
+  "envs": {
+    "sit": {
+      "account": "openapi@<sit-account>.onaliyun.com",
+      "accessKeyId": "<your-sit-access-key-id>",
+      "access_key": "<your-sit-access-key-secret>",
+      "endpoint": "cn-hangzhou.log.aliyuncs.com"
+    },
+    "prod": {
+      "account": "openapi@<prod-account>.onaliyun.com",
+      "accessKeyId": "<your-prod-access-key-id>",
+      "access_key": "<your-prod-access-key-secret>",
+      "endpoint": "cn-hangzhou-finance.log.aliyuncs.com"
+    }
+  }
+}

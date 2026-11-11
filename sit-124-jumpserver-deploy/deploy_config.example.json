@@ -1,0 +1,52 @@
+{
+  "jump": {
+    "host": "",
+    "port": "",
+    "user": "",
+    "password": "<your-jump-password>"
+  },
+  "services": {
+    "equities-core": {
+      "script_name": "equities-core",
+      "script_path": "/opt/citytsm-oper/operation-parent/equities-core",
+      "code_path": "/opt/citytsm-oper/operation-parent/code/operation-parent",
+      "branch": "develop",
+      "label": "权益中心"
+    },
+    "citytsm-sys-equities": {
+      "script_name": "equities-bm/equities-bm",
+      "script_path": "/opt/citytsm-oper/citytsm-sys-equities",
+      "code_path": "/opt/citytsm-oper/citytsm-sys-equities/code/citytsm-sys-equities",
+      "branch": "develop",
+      "label": "权益中心后管"
+    },
+    "citytsm-pm": {
+      "script_name": "citytsm-pm",
+      "script_path": "/opt/citytsm-base/citytsm-pm",
+      "code_path": "/opt/citytsm-base/citytsm-pm/code/citytsm-pm",
+      "branch": "stable",
+      "label": "项目管理"
+    },
+    "citytsm-sys-advert": {
+      "script_name": "advert-bm",
+      "script_path": "/opt/citytsm-oper/citytsm-sys-advert",
+      "code_path": "/opt/citytsm-oper/citytsm-sys-advert/code/citytsm-sys-advert",
+      "branch": "stable",
+      "label": "广告后管"
+    },
+    "citytsm-module-system": {
+      "script_name": "citytsm-module-system",
+      "script_path": "/opt/citytsm-cloud/cloud/citytsm-module-system",
+      "code_path": "/opt/citytsm-cloud/cloud/code/citytsm-cloud",
+      "branch": "stable",
+      "label": "云枢系统管理"
+    },
+    "citytsm-tcapp-gateway": {
+      "script_name": "citytsm-tcapp-gateway/citytsm-tcapp-gateway",
+      "script_path": "/opt/citytsm-base/citytsm-tcapp-gateway",
+      "code_path": "/opt/citytsm-base/citytsm-tcapp-gateway/code/citytsm-tcapp-gateway",
+      "branch": "stable",
+      "label": "小程序网关"
+    }
+  }
+}
