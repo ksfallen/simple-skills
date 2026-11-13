@@ -42,7 +42,7 @@ git show <commit>                                    # 逐个提交看具体改�
 要求：
 - 用 `origin/master..develop`（双点）取"本地分支领先生产"的提交
 - 逐提交阅读 diff，归纳出：功能点清单、影响的模块/服务、数据库变更（DDL）、配置变更、Redis/资源变更
-- 部署 Commit 用本地分支 HEAD 短哈希：`git rev-parse --short HEAD`
+- 部署 Commit 填本地分支 HEAD 的**完整 commitId（40 位）**：`git rev-parse HEAD`，不要用 `git rev-parse --short HEAD`（提测文档「六、部署服务」的 Commit 必须可直接用于部署平台）
 - Git 地址用：`git remote get-url origin`
 - **对每个功能点做影响评估**，形成"影响评估清单"，供 Step 3 提测文档「三、影响范围」直接使用：
   - 触发条件：哪些设备/渠道/请求场景才会命中该改动（如"仅 Harmony 且无 CPLC 的请求"）
