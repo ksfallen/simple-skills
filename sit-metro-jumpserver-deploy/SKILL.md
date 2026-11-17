@@ -13,7 +13,7 @@ version: 1.0.0
 本工具只做**服务部署相关操作**，不对服务器做任何修改、删除类高危动作。
 
 - 允许的命令只有这六个子命令：`deploy` / `issue` / `start` / `stop` / `restart` / `verify`（即 `./<脚本> [rcmd] <动作>`），不要用 `bash -c` 拼别的东西。
-- 允许在目标机执行的其它命令仅限**只读排查**：`ls`、`cat`、`head`、`tail`、`ps`、`ss`、`netstat`、`grep`、`git status/log/remote -v/rev-parse --abbrev-ref HEAD`、`test -d`。
+- 允许在目标机执行的其它命令仅限**只读排查**：`ls`、`cat`、`head`、`tail`、`ps`、`ss`、`netstat`、`grep`、`git status/log/remote -v/rev-parse --abbrev-ref HEAD`、`test -d/-f/-e`。这些走 `./deploy.sh --readonly "<单条命令>"`（不执行任何部署动作）：只接受白名单开头的一条命令，含 `;` `&` `|` `$` `` ` `` `>` `<` 换行的直接拒，`git` 也只认上面那几个只读子命令。
 - 禁止执行（即使用户没提到也不行，需要先取得用户明确同意并说明影响）：
   - 文件与权限：`rm`、`mv`、`cp` 覆盖、`touch`/`>` 写配置、`chmod`、`chown`、`mkdir`、建软链、改 `/etc` 下任何文件
   - 进程与服务：`kill`、`pkill`、`systemctl`、`service`、重启机器或数据库实例
@@ -21,7 +21,7 @@ version: 1.0.0
   - Git 破坏性操作：`reset --hard`、`clean`、`checkout -- <file>`、`push`、删分支、`rebase`
   - 数据库：DDL、`UPDATE`/`DELETE`、导入导出、直接改配置中心里的值
 - 不在目标机留下任何临时文件、备份或日志；本地临时探测脚本（`_probe.py` 之类）用完即删。
-- 动作有破坏性后果的（`deploy`/`issue`/`restart`/`stop` 会影响 SIT 运行中的服务）只在用户明确要求时执行，绝不作为"顺手验证"或"清理"的一部分；`verify` 是只读的状态检查，可放心使用。
+- 动作有破坏性后果的（`deploy`/`issue`/`restart`/`stop` 会影响 SIT 运行中的服务）只在用户明确要求时执行，绝不作为"顺手验证"或"清理"的一部分；`verify` 和 `--readonly` 是只读的，可放心使用。
 
 ## 工具位置
 
@@ -63,6 +63,11 @@ skills/sit-metro-jumpserver-deploy/
 # 南通服务（同样在 test-tools001，路径前缀 /opt/nantong，不带 target_host）
 ./deploy.sh -s nantong-metro-integration -a verify
 ./deploy.sh -s nantong-metro-pay -a deploy
+
+# 只读排查目标机（不执行任何部署动作，命令须是白名单单条）
+./deploy.sh --readonly "ls -1 /opt/receipt/metro-receipt"
+./deploy.sh --readonly "cat /opt/receipt/metro-receipt/metro-receipt"
+./deploy.sh -s nanjing-metro-retro --readonly "ls -1 /opt/receipt/metro-retro"
 ```
 
 可用操作：deploy / issue / start / stop / restart / verify，默认 deploy。
@@ -90,13 +95,16 @@ TARGET_USER = "tsm-local"        # JumpServer 账号名，实际系统用户 tsm
 
 目标机上 `<script_path>/<脚本名>` 内部区分三类主机：
 
-- `deploy_host`（test-tools001 / test-nanjing-tools001）：只构建、不分发运行，列在 `no_start_hosts`
+- `deploy_host`（test-tools001 / test-nanjing-tools001）：只负责构建和分发，服务不在上面跑，列在 `no_start_hosts`
 - `issue_hosts`（如 test-receipt001）：真正跑服务的机器，`issue` 会把 jar + 配置同步过去
 - 因此 `deploy` 在 tools 机执行，`restart/verify` 等 rcmd 会由脚本自行转发到 issue 机
 
-`-a deploy` 只构建不发布；要让线上生效需再执行 `-a issue`（或在 tools 机 deploy 后手动 issue）。个别城市的 `deploy` 已内置同步+重启（南通卡管实测如此），先看该服务 deploy 输出里有没有 `部署 <issue机> ... sync ... 服务启动已完成`，有就不用再 issue。
+发布脚本对所有服务都是同一套动作，按动作理解、不要按服务找特例：
 
-`deploy` 内置的同步只覆盖它自己输出的那台运行机，不等于全部 `issue_hosts`。metro-receipt 实测：`deploy` 只发了 test-receipt001，test-spi001 要靠 `issue` 补，两台各归一次动作。所以发完后跑一次 `verify`，凡是 jar 时间还停在旧日期的运行机，都要单独确认是否漏发。
+- `-a deploy`：切分支 + mvn 打包 + 把新 jar 和配置发布到 `issue_hosts` + 重启，一条就生效，不用再补 `issue`。
+- `-a issue`：不重新构建，直接把 tools 机上现有的包发布到 `issue_hosts` + 重启（换了别处构建的包、或只改配置时用）。
+- `-a start` / `stop` / `restart` / `verify`：走 `rcmd`，由脚本转发到 `issue_hosts` 逐台执行。
+- 发布是否真的落到某台运行机，只看 verify 里那台的 jar 时间戳；时间还停在旧日期就是没发出去，别当成"这台不用发"。
 
 ## 部署完成输出（必须给这张表）
 
@@ -104,8 +112,7 @@ TARGET_USER = "tsm-local"        # JumpServer 账号名，实际系统用户 tsm
 
 | 运行机 | IP | 端口 | pid | 时间 |
 | --- | --- | --- | --- | --- |
-| test-receipt001 | 192.168.24.166 | 8081 | 19068 | 2026-11-13 10:46 |
-| test-spi001 | 192.168.24.163 | 8081 | 11870 | 2026-11-13 10:46 |
+| test-receipt001 | 192.168.24.166 | 8081 | 2976 | 2026-11-17 10:16 |
 
 各列来源：
 
@@ -158,7 +165,7 @@ metro 服务目录分布：`/opt/little`（ech5）、`/opt/manage`（卡管）�
 | metro-retro | 补登 | /opt/receipt/metro-retro | metro-retro [stable] | test-receipt001:8083 |
 | metro-ech5 | ech5 | /opt/little/ech5 · `ebuscard` | metro-ech5 [stable] | test-little001:8080 |
 | metro-integration | 卡管 | /opt/manage/integration · `integration` | metro-ecard-manage [stable] | test-manage001:8087 |
-| metro-receipt | 收单 | /opt/receipt/metro-receipt | metro-receipt [stable] | test-receipt001 + test-spi001:8081 |
+| metro-receipt | 收单 | /opt/receipt/metro-receipt | metro-receipt [stable] | test-receipt001:8081 |
 | metro-pay | 支付 | /opt/receipt/metro-pay/ace-pay · `pay` | /opt/receipt/metro-pay/code/metro-pay [dev] | test-receipt001:7004 |
 | metro-benefit | 权益 | /opt/receipt/metro-pay/metro-benefit-core · `metro-benefit` | /opt/receipt/metro-pay/code/metro-pay [dev] | test-front001:7009 |
 | metro-settlement | 对账 | /opt/receipt/metro-settlement · `settlement` | metro-settlement [dev] | test-receipt001:6002 |

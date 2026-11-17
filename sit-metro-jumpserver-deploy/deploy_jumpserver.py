@@ -985,6 +985,33 @@ def list_only(session):
     return 0
 
 
+# ─── 只读排查通道 ─────────────────────────────────────
+
+READONLY_CMDS = ("ls", "cat", "head", "tail", "ps", "ss", "netstat", "grep", "test", "git")
+READONLY_GIT_SUB = ("status", "log", "remote -v", "rev-parse --abbrev-ref HEAD")
+READONLY_FORBIDDEN = (";", "&", "|", "`", "$", ">", "<", "\n")
+
+
+def check_readonly(cmd):
+    """只读白名单校验：拒绝链式、重定向与命令替换，返回 (是否放行, 拒绝原因)。"""
+    parts = cmd.split()
+    if not parts:
+        return False, "空命令"
+    for bad in READONLY_FORBIDDEN:
+        if bad in cmd:
+            return False, f"禁止 {bad!r}（只读通道不允许链式执行、重定向和命令替换）"
+    head = parts[0]
+    if head not in READONLY_CMDS:
+        return False, f"{head} 不在只读白名单（可用: {'/'.join(READONLY_CMDS)}）"
+    if head == "test" and (len(parts) < 3 or parts[1] not in ("-d", "-f", "-e")):
+        return False, "test 只允许 -d/-f/-e 判断"
+    if head == "git":
+        rest = " ".join(parts[1:])
+        if not any(rest == g or rest.startswith(g + " ") for g in READONLY_GIT_SUB):
+            return False, "git 只允许 status/log/remote -v/rev-parse --abbrev-ref HEAD"
+    return True, ""
+
+
 # ─── CLI 入口 ─────────────────────────────────────────
 
 def main():
@@ -1022,6 +1049,11 @@ def main():
     parser.add_argument("--jump-host", default=JUMP_HOST, help=f"跳板机地址 (默认 {JUMP_HOST})")
     parser.add_argument("--jump-port", type=int, default=JUMP_PORT, help=f"跳板机端口 (默认 {JUMP_PORT})")
     parser.add_argument("--timeout", type=int, default=600, help="部署命令超时秒数 (默认 600)")
+    parser.add_argument(
+        "--readonly",
+        metavar="CMD",
+        help="在目标机执行只读排查命令，不执行任何部署动作（白名单: " + "/".join(READONLY_CMDS) + "，git 限只读子命令）",
+    )
 
     args = parser.parse_args()
 
@@ -1090,10 +1122,20 @@ def main():
             log_ok("目标服务器就绪")
         else:
             log_warn("命令执行验证失败，可能连接不稳定")
-            if not args.list:
+            if not args.list and not args.readonly:
                 cont = input("  是否继续? (y/n): ").strip().lower()
                 if cont != "y":
                     return 1
+
+        if args.readonly:
+            allowed, why = check_readonly(args.readonly)
+            if not allowed:
+                log_err(f"拒绝执行只读命令: {why}")
+                return 1
+            log_info(f"只读排查: {args.readonly}")
+            _, out = session.exec_on_target(args.readonly, show_output=False, timeout=args.timeout)
+            print(out)
+            return 0
 
         # 显示已注册服务
         if SERVICE_REGISTRY:
